@@ -1,0 +1,10 @@
+{
+  "sidebar": {
+    "dashboard": "Dashboard",
+    "tenants": "Tenants",
+    "branches": "Branches",
+    "users": "Users",
+    "orders": "Orders",
+    "logout": "Logout"
+  }
+}

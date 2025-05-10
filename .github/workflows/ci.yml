@@ -1,0 +1,54 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    branches:
+      - main
+      - develop
+
+jobs:
+  lint-and-format:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the repository code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      # Step 3: Verify Node.js and npm installation
+      - name: Verify Node.js and npm
+        run: |
+          node --version
+          npm --version
+
+      # Step 4: Install pnpm
+      - name: Install pnpm
+        run: npm i -g pnpm
+
+      # Step 5: Verify pnpm installation
+      - name: Verify pnpm installation
+        run: pnpm --version
+
+      # Step 6: Install dependencies
+      - name: Install dependencies
+        run: pnpm install
+
+      # Step 7: Run ESLint
+      - name: Run ESLint
+        run: pnpm lint
+        env:
+          CI: true
+
+      # Step 8: Run Prettier
+      - name: Run Prettier
+        run: pnpm format
